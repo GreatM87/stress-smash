@@ -660,6 +660,23 @@ function tick(){
 
 renderToday();
 
+// ================= auto update (GitHub Pages) =================
+const APP_VERSION = "2026-10-28-1";
+if(/github\.io$/.test(location.hostname)){
+  const check = async () => {
+    try{
+      const res = await fetch(location.pathname + "?check=" + Date.now(), { cache: "no-store" });
+      const m = (await res.text()).match(/APP_VERSION = "([^"]+)"/);
+      if(m && m[1] !== APP_VERSION && step < 0){
+        let last = null; try{ last = sessionStorage.getItem("reloadedFor"); }catch(e){}
+        if(last !== m[1]){ try{ sessionStorage.setItem("reloadedFor", m[1]); }catch(e){} location.replace(location.pathname + "?v=" + encodeURIComponent(m[1])); }
+      }
+    }catch(e){}
+  };
+  check();
+  document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") check(); });
+}
+
 // ================= sync inside Claude =================
 if(window.claude && claude.use){
   (async()=>{ try{
