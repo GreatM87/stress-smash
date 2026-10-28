@@ -292,7 +292,7 @@ const lvOf = t => 1 + Math.floor(rng(t)()*3);
 const PAL = {facet:["#2B2F39","#7C8290"], glass:["#6F889E","#DCE8F0"]};
 const PARTC = {facet:["#6E7482","#454A57","#2E323C"], glass:["#C9DAE6","#9DB4C8","#7F98AE"], pebble:["#827B73","#6E6861","#4E4A45"]};
 function mix(a,b,t){ const p=s=>[1,3,5].map(i=>parseInt(s.slice(i,i+2),16)); const A=p(a),B=p(b); return "#"+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,"0")).join(""); }
-function styleOf(){ const m = draft && draft.mood; return !m ? "facet" : m<=2 ? "glass" : m===3 ? "facet" : "pebble"; }
+function styleOf(){ const m = draft && draft.mood; return m && m<=2 ? "glass" : "facet"; }
 function rockShape(id, style){
   const r = rng(id+style);
   const open = `<svg class="shape" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">`;
@@ -428,7 +428,7 @@ function renderRitual(el){
   if(!left.some(r=>r.id===sel)){ sel = left[0].id; carryOpen = false; }
   const r = rocks.find(x=>x.id===sel);
   const load = left.reduce((a,x)=>a + (isReady(x)?0.4:1), 0);
-  el.innerHTML = progress() + sceneHTML("오늘 해본 것만큼 금이 가요", "", load) + `<div class="card panel" id="panel"></div><button class="back" id="prev" type="button">이전</button>`;
+  el.innerHTML = progress() + sceneHTML("오늘 해본 것만큼 금이 가요", "", load) + `<div class="card panel" id="panel"></div><button class="primary" id="smashAll" type="button">남은 바위 한 번에 깨기 · ${left.length}개</button><button class="back" id="prev" type="button">이전</button>`;
   const stack = $("stack"), style = styleOf();
   left.forEach(x => {
     const lv = lvOf(x.text), b = document.createElement("div");
@@ -441,6 +441,15 @@ function renderRitual(el){
   });
   renderPanel(r);
   $("prev").onclick = () => { step = 3; renderToday(); };
+  $("smashAll").onclick = () => {
+    const els = [...stack.children];
+    $("smashAll").disabled = true; $("prev").disabled = true;
+    $("scene").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    const gap = reduce ? 0 : 160, lead = reduce ? 0 : 350;
+    left.forEach((x,i) => { x.fate = "smashed"; setTimeout(() => shatter(els[i], lvOf(x.text)), lead + i*gap); });
+    setTimeout(() => caption(left.length > 1 ? "전부 내려놓았어요" : "내려놓았어요"), lead);
+    setTimeout(() => renderToday(), reduce ? 200 : lead + left.length*gap + 1100);
+  };
 }
 function renderPanel(r){
   const p = $("panel"), acts = actsFor(r), plan = r.plan;
@@ -473,6 +482,7 @@ function addAct(r, a){
   if(!was && isReady(r)){ caption("금이 다 갔어요"); if(navigator.vibrate) try{ navigator.vibrate([15,40,15]); }catch(e){} }
 }
 function tapRock(r, el, x, y, lv){
+  if(r.fate) return;
   if(sel !== r.id){ sel = r.id; carryOpen = false; renderToday(); return; }
   if(!isReady(r)){ el.classList.remove("wob"); void el.offsetWidth; el.classList.add("wob"); return; }
   r.hits++;
