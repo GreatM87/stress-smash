@@ -6,181 +6,190 @@
 <title>오늘 부수고 자기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#F3F0EA; --surface:#FBFAF7; --ink:#1D2130; --muted:#767887; --hair:#DCD7CE;
-  --gold:#A9843A; --gold-soft:#EFE4CC; --sel:#1D2130; --on-sel:#FBFAF7;
-  --m5:#D9B45E; --m4:#8FB3A0; --m3:#AFA9C2; --m2:#C4907F; --m1:#5F6987;
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#111111; --muted:#6B6B6B; --hair:#E2E2E2; --scene:#F2F2F2;
+  --gold:#FF5A1F; --gold-soft:#FFE7DD; --sel:#111111; --on-sel:#FFFFFF;
+  --m5:#FF5A1F; --m4:#FF9E7A; --m3:#D9D9D9; --m2:#A8A8A8; --m1:#7A7A7A;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0E1118; --surface:#161A24; --ink:#ECE8E1; --muted:#8F92A1; --hair:#2A2F3C;
-    --gold:#D9B56A; --gold-soft:#2C2719; --sel:#ECE8E1; --on-sel:#0E1118; color-scheme:dark;
+    --bg:#0B0B0B; --surface:#0B0B0B; --ink:#F5F5F5; --muted:#A3A3A3; --hair:#2A2A2A; --scene:#1A1A1A;
+    --gold-soft:#2A1A12; --sel:#F5F5F5; --on-sel:#0B0B0B; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E1118; --surface:#161A24; --ink:#ECE8E1; --muted:#8F92A1; --hair:#2A2F3C;
-  --gold:#D9B56A; --gold-soft:#2C2719; --sel:#ECE8E1; --on-sel:#0E1118; color-scheme:dark;
+  --bg:#0B0B0B; --surface:#0B0B0B; --ink:#F5F5F5; --muted:#A3A3A3; --hair:#2A2A2A; --scene:#1A1A1A;
+  --gold-soft:#2A1A12; --sel:#F5F5F5; --on-sel:#0B0B0B; color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;letter-spacing:-.005em;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.wrap{max-width:500px;margin:0 auto;padding:26px 20px 80px}
-.serif{font-family:"Gowun Batang",serif}
-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:22px}
-h1{font-family:"Gowun Batang",serif;font-weight:700;font-size:1.35rem;margin:0;letter-spacing:-.01em}
-.date{color:var(--muted);font-size:.85rem;margin:0}
-h2{font-family:"Gowun Batang",serif;font-weight:700;font-size:1.45rem;line-height:1.35;margin:0 0 6px;letter-spacing:-.01em}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.wrap{max-width:500px;margin:0 auto;padding:24px 20px 80px}
+.serif{font-family:inherit;font-weight:700}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
+h1{font-weight:700;font-size:1.15rem;margin:0;letter-spacing:-.01em}
+.date{color:var(--muted);font-size:.8rem;font-weight:500;letter-spacing:.06em;margin:0}
+h2{font-weight:700;font-size:1.85rem;line-height:1.15;margin:0 0 6px;letter-spacing:-.03em}
 .lead{color:var(--muted);font-size:.9rem;margin:0 0 20px}
-h3{font-size:.8rem;font-weight:500;letter-spacing:.06em;color:var(--muted);margin:20px 0 10px}
+h3{font-size:.76rem;font-weight:700;letter-spacing:.08em;color:var(--muted);margin:20px 0 10px}
 button{font:inherit;cursor:pointer;color:var(--ink)}
-button:focus-visible,input:focus-visible,.rock:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.card{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:18px;margin-bottom:14px}
+button:focus-visible,input:focus-visible,.rock:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.card{background:transparent;border:none;border-top:2px solid var(--ink);border-radius:0;padding:16px 0 4px;margin-bottom:16px}
 .muted{color:var(--muted)}
 .empty{color:var(--muted);font-size:.92rem;margin:0}
 
-.nav{display:flex;gap:22px;border-bottom:1px solid var(--hair);margin:0 0 24px}
-.nav button{border:none;background:none;padding:0 0 10px;font-size:.95rem;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
-.nav button.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
+.nav{display:flex;gap:22px;border-bottom:2px solid var(--ink);margin:0 0 24px}
+.nav button{border:none;background:none;padding:0 0 10px;font-size:.95rem;font-weight:500;color:var(--muted);border-bottom:4px solid transparent;margin-bottom:-2px}
+.nav button.on{color:var(--ink);border-bottom-color:var(--gold);font-weight:700}
 
-.primary{width:100%;font-size:1rem;font-weight:500;padding:15px;border:none;border-radius:12px;background:var(--sel);color:var(--on-sel);letter-spacing:.01em}
+.primary{width:100%;font-size:1.02rem;font-weight:700;padding:17px 18px;border:none;border-radius:0;background:var(--gold);color:#111111;text-align:left;display:flex;justify-content:space-between;align-items:center}
+.primary::after{content:"→"}
 .primary:active{opacity:.85}
 .row{display:flex;gap:12px;align-items:center;margin-top:24px}
 .row .primary{flex:1}
-.back{border:none;background:none;color:var(--muted);padding:12px 4px;font-size:.92rem}
-.linkbtn{border:none;background:none;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:6px 0;font-size:.88rem}
+.back{border:none;background:none;color:var(--ink);font-weight:500;padding:12px 4px;font-size:.92rem}
+.linkbtn{border:none;background:none;color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;padding:6px 0;font-size:.88rem}
 
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:9px 14px;border:1px solid var(--hair);border-radius:10px;background:var(--surface);font-size:.92rem;line-height:1.35;transition:background .15s,color .15s,border-color .15s}
-.chip.on{background:var(--sel);color:var(--on-sel);border-color:var(--sel)}
-.chip.done{background:var(--gold-soft);border-color:var(--gold);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:10px 13px;border:2px solid var(--ink);border-radius:0;background:transparent;font-size:.9rem;font-weight:500;line-height:1.35}
+.chip.on{background:var(--ink);color:var(--bg)}
+.chip.done{background:var(--ink);color:var(--bg)}
 .chip.done::before{content:"✓ ";color:var(--gold)}
-.chip.ghost{border-style:dashed;color:var(--muted);background:transparent}
-.chip.sm{padding:5px 10px;font-size:.84rem}
+.chip.ghost{border-style:dashed;color:var(--muted)}
+.chip.sm{padding:5px 9px;font-size:.82rem;border-width:1.5px}
 .chip.static{cursor:default}
 .chip.plan{border-color:var(--gold)}
-.tabs{display:flex;gap:18px;overflow-x:auto;margin:0 0 14px;scrollbar-width:none;border-bottom:1px solid var(--hair)}
+.tabs{display:flex;gap:18px;overflow-x:auto;margin:0 0 14px;scrollbar-width:none;border-bottom:2px solid var(--hair)}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;padding:0 0 8px;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:var(--muted);font-size:.9rem}
-.tab.on{color:var(--ink);border-bottom-color:var(--gold)}
+.tab{flex:none;padding:0 0 8px;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;background:none;color:var(--muted);font-size:.9rem;font-weight:500}
+.tab.on{color:var(--ink);border-bottom-color:var(--gold);font-weight:700}
 .picked{margin:0 0 16px;font-size:.88rem;color:var(--muted)}
-.picked b{color:var(--ink);font-weight:500}
-.own{display:flex;gap:8px;margin-top:12px}
-.own input,.memo{flex:1;min-width:0;border:1px solid var(--hair);border-radius:10px;padding:11px 12px;font:inherit;background:var(--surface);color:var(--ink)}
-.own button{padding:9px 16px;border:none;border-radius:10px;background:var(--sel);color:var(--on-sel)}
+.picked b{color:var(--ink);font-weight:700}
+.own{display:flex;gap:6px;margin-top:12px}
+.own input,.memo{flex:1;min-width:0;border:2px solid var(--ink);border-radius:0;padding:11px 12px;font:inherit;background:transparent;color:var(--ink)}
+.own button{padding:9px 16px;border:none;border-radius:0;background:var(--ink);color:var(--bg);font-weight:700}
 .memo{width:100%}
 
-.progress{height:2px;background:var(--hair);margin:0 0 26px;border-radius:1px;overflow:hidden}
+.progress{display:block;height:6px;background:var(--hair);margin:0 0 24px}
 .progress i{display:block;height:100%;background:var(--gold);transition:width .4s}
-.moods{display:flex;flex-direction:column;gap:8px}
-.mood{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:1rem;text-align:left}
-.mood .dot{width:14px;height:14px;border-radius:50%;flex:none}
-.mood.on{border-color:var(--ink)}
+.moods{display:flex;flex-direction:column;gap:6px}
+.mood{display:flex;align-items:center;gap:14px;padding:16px;border:2px solid var(--ink);border-radius:0;background:transparent;font-size:1rem;font-weight:500;text-align:left}
+.mood .dot{width:16px;height:16px;border-radius:0;flex:none}
+.mood.on{background:var(--ink);color:var(--bg)}
 
 /* scene */
-.scene{position:relative;border-radius:20px;overflow:hidden;min-height:310px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:56px 14px 0;margin-bottom:16px;
-  background:radial-gradient(120% 80% at 50% 0%, #252B3D 0%, #141826 60%, #0D1019 100%);color:#ECE8E1}
-.scene .say{position:absolute;top:18px;left:18px;right:18px;margin:0;text-align:center;font-family:"Gowun Batang",serif;font-size:.98rem;color:rgba(236,232,225,.82)}
-.moon{position:absolute;top:58px;right:34px;width:54px;height:54px;border-radius:50%;
-  background:radial-gradient(circle at 38% 36%, #FFF6DD 0%, #F0D79A 55%, #C9A75E 100%);
-  box-shadow:0 0 30px 8px rgba(240,215,154,.35),0 0 90px 30px rgba(240,215,154,.12);transition:filter 1.2s ease, box-shadow 1.2s ease, opacity 1.2s}
-.stars{position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1px 1px at 12% 22%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 28% 12%,#fff 50%,transparent 51%),radial-gradient(1.2px 1.2px at 46% 30%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 64% 16%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 8% 48%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 88% 44%,#fff 50%,transparent 51%),radial-gradient(1.2px 1.2px at 22% 38%,#fff 50%,transparent 51%)}
+.scene{position:relative;border-radius:0;overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:52px 14px 0;margin-bottom:16px;background:var(--scene);color:var(--ink)}
+.scene .say{position:absolute;top:16px;left:16px;right:16px;margin:0;font-weight:700;font-size:.95rem;color:var(--ink)}
+.moon,.stars{display:none}
 .stack{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%}
-.horizon{position:relative;z-index:1;width:calc(100% + 28px);height:34px;background:linear-gradient(#1B2030,#10131C);border-top:1px solid rgba(236,232,225,.14);margin-top:-2px}
-.rock{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 20px;margin-top:-8px;color:rgba(240,236,228,.92);font-size:.86rem;font-weight:500;letter-spacing:.01em;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;word-break:keep-all;overflow-wrap:anywhere;line-height:1.35;
-}
+.horizon{position:relative;z-index:1;width:calc(100% + 28px);height:20px;background:var(--ink);margin-top:-2px}
+.rock{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 20px;margin-top:-6px;color:#FFFFFF;font-size:.86rem;font-weight:700;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;word-break:keep-all;overflow-wrap:anywhere;line-height:1.35}
 .rock.l1{width:min(54%,210px);min-height:56px}
 .rock.l2{width:min(68%,270px);min-height:68px}
 .rock.l3{width:min(82%,320px);min-height:80px}
-.rock .shape{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;filter:drop-shadow(0 8px 9px rgba(0,0,0,.45));transition:filter .4s}
-.rock.glass span{color:#15202C;text-shadow:0 1px 1px rgba(255,255,255,.35)}
+.rock .shape{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.rock.glass{color:#111111}
 .rock.small{width:min(44%,170px);min-height:42px;font-size:.78rem;cursor:default}
-.rock:nth-child(odd){transform:rotate(-1.5deg)} .rock:nth-child(even){transform:rotate(2deg) translateX(5px)}
-.rock.sel .shape{filter:drop-shadow(0 8px 9px rgba(0,0,0,.45)) drop-shadow(0 0 1.5px rgba(236,232,225,.95))}
-.rock.ready .shape{filter:drop-shadow(0 0 2px rgba(217,181,106,.95)) drop-shadow(0 0 12px rgba(217,181,106,.55))}
+.rock:nth-child(odd){transform:rotate(-1deg)} .rock:nth-child(even){transform:rotate(1.5deg) translateX(5px)}
 .rock.wob{animation:wob .3s}
 @keyframes wob{0%,100%{translate:0 0}25%{translate:-3px 0}75%{translate:3px 0}}
-.rock.hit{animation:hit .14s}
-@keyframes hit{0%{translate:0 0}40%{translate:-3px 2px}70%{translate:2px -1px}100%{translate:0 0}}
-.rock span{position:relative;z-index:2;pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.5)}
-.rock svg.ck{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible;filter:drop-shadow(0 0 2.5px rgba(232,198,120,.9))}
-.rock svg.ck path{fill:none;stroke:#E8C678;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.caption{position:absolute;left:0;right:0;bottom:46px;z-index:3;text-align:center;font-family:"Gowun Batang",serif;color:#F0D79A;font-size:1.05rem;opacity:0;pointer-events:none}
-.caption.go{animation:cap 1.8s ease forwards}
+.rock.hit{animation:hit .12s}
+@keyframes hit{0%{translate:0 0}40%{translate:-4px 2px}70%{translate:3px -1px}100%{translate:0 0}}
+.rock span{position:relative;z-index:2;pointer-events:none}
+.rock svg.ck{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+.rock svg.ck path{fill:none;stroke:#FFFFFF;stroke-width:2.4;stroke-linecap:square;stroke-linejoin:miter;vector-effect:non-scaling-stroke}
+.caption{position:absolute;left:0;right:0;bottom:34px;z-index:3;text-align:center;font-weight:700;color:var(--ink);font-size:1.1rem;opacity:0;pointer-events:none}
+.caption.go{animation:cap 1.6s ease forwards}
 @keyframes cap{0%{opacity:0;transform:translateY(6px)}20%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
-.drift{animation:drift 6s ease-in-out infinite}
-@keyframes drift{0%,100%{translate:0 0}50%{translate:0 -3px}}
 
 /* panel */
-.panel h4{font-family:"Gowun Batang",serif;font-size:1.15rem;margin:0 0 4px}
-.bar{height:3px;background:var(--hair);border-radius:2px;overflow:hidden;margin:10px 0 4px}
+.panel h4{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin:0 0 4px}
+.bar{height:6px;background:var(--hair);overflow:hidden;margin:10px 0 6px}
 .bar i{display:block;height:100%;background:var(--gold);transition:width .3s}
 .note{font-size:.84rem;color:var(--muted);margin:0}
-.callout{margin:14px 0 0;padding:12px 14px;border-radius:10px;background:var(--gold-soft);border:1px solid var(--gold);font-size:.9rem}
-.plan{margin:10px 0 0;font-size:.86rem;color:var(--gold)}
-.foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--hair)}
+.callout{margin:14px 0 0;padding:12px 14px;background:var(--gold);color:#111111;font-weight:700;font-size:.9rem}
+.plan{margin:10px 0 0;font-size:.86rem;font-weight:700;color:var(--ink)}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:12px;border-top:2px solid var(--hair)}
 .carrybox{margin-top:12px}
 
 /* summary */
 .sumhead{display:flex;align-items:center;gap:12px}
-.sumhead .dot{width:18px;height:18px;border-radius:50%;flex:none}
-.sumhead b{font-family:"Gowun Batang",serif;font-size:1.15rem}
-.memoq{font-family:"Gowun Batang",serif;color:var(--muted);margin:8px 0 0}
+.sumhead .dot{width:20px;height:20px;border-radius:0;flex:none}
+.sumhead b{font-size:1.3rem;letter-spacing:-.02em}
+.memoq{color:var(--muted);margin:8px 0 0}
 
 /* calendar */
 .calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.calhead b{font-family:"Gowun Batang",serif;font-size:1.1rem}
-.calhead button{border:1px solid var(--hair);background:transparent;border-radius:8px;width:36px;height:32px;color:var(--muted)}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
-.cal .wd{font-size:.74rem;color:var(--muted);padding-bottom:4px}
-.cal button{aspect-ratio:1;border:none;border-radius:50%;background:transparent;font-size:.82rem;padding:0;color:var(--muted);position:relative}
-.cal button.has{color:#1D2130;font-weight:500}
-.cal button.today::after{content:"";position:absolute;inset:-3px;border:1px solid var(--gold);border-radius:50%}
-.cal button.sel{box-shadow:0 0 0 2px var(--ink)}
+.calhead b{font-size:1.2rem;letter-spacing:-.02em}
+.calhead button{border:2px solid var(--ink);background:transparent;border-radius:0;width:40px;height:36px;font-weight:700}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal .wd{font-size:.74rem;font-weight:700;color:var(--muted);padding-bottom:4px}
+.cal button{aspect-ratio:1;border:none;border-radius:0;background:var(--hair);font-size:.82rem;font-weight:500;padding:0;color:var(--muted);position:relative}
+.cal button.has{color:#111111;font-weight:700}
+.cal button.today::after{content:"";position:absolute;inset:0;border:2px solid var(--ink)}
+.cal button.sel{outline:3px solid var(--gold);outline-offset:-3px}
 .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;font-size:.76rem;color:var(--muted)}
 .legend span{display:inline-flex;align-items:center;gap:5px}
-.legend i{width:9px;height:9px;border-radius:50%}
+.legend i{width:10px;height:10px}
 
 /* stats */
-.seg{display:inline-flex;border:1px solid var(--hair);border-radius:10px;padding:3px;margin:0 0 16px}
-.seg button{padding:6px 16px;border:none;border-radius:8px;background:transparent;font-size:.86rem;color:var(--muted)}
-.seg button.on{background:var(--sel);color:var(--on-sel)}
-.sumgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
-.sum{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:14px 16px}
-.sum b{display:block;font-family:"Gowun Batang",serif;font-size:1.55rem;line-height:1.2}
-.sum span{font-size:.8rem;color:var(--muted)}
-.sum .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.seg{display:inline-flex;border:2px solid var(--ink);margin:0 0 16px}
+.seg button{padding:7px 16px;border:none;border-radius:0;background:transparent;font-size:.86rem;font-weight:500;color:var(--ink)}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.sumgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-bottom:16px;border-top:2px solid var(--ink)}
+.sum{background:transparent;border:none;border-bottom:2px solid var(--hair);border-radius:0;padding:14px 4px}
+.sum b{display:block;font-size:2rem;font-weight:700;letter-spacing:-.04em;line-height:1.1}
+.sum span{font-size:.78rem;font-weight:500;color:var(--muted)}
+.sum .dot{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:middle}
 .stat{display:grid;grid-template-columns:5.4em 1fr 1.8em;align-items:center;gap:10px;margin-bottom:10px;font-size:.88rem}
-.stat .track{height:6px;background:var(--hair);border-radius:3px;overflow:hidden}
-.stat .track i{display:block;height:100%;background:var(--gold);border-radius:3px}
-.stat .n{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.stat .track{height:10px;background:var(--hair);overflow:hidden}
+.stat .track i{display:block;height:100%;background:var(--ink)}
+.stat .n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
 .rank{margin:0;padding:0;list-style:none;counter-reset:r}
-.rank li{counter-increment:r;display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--hair);font-size:.92rem}
+.rank li{counter-increment:r;display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1.5px solid var(--hair);font-size:.92rem}
 .rank li:last-child{border-bottom:none}
-.rank li::before{content:counter(r);font-family:"Gowun Batang",serif;color:var(--gold);width:1em}
+.rank li::before{content:counter(r);font-weight:700;color:var(--gold);width:1em}
 .rank li span{margin-left:auto;color:var(--muted);font-size:.82rem}
-.insight{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--hair);font-family:"Gowun Batang",serif;font-size:.98rem}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:120px}
-.days div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;font-size:.76rem;color:var(--muted)}
-.days i{width:14px;border-radius:7px;min-height:4px}
+.insight{margin:16px 0 0;padding:12px 14px;background:var(--ink);color:var(--bg);font-weight:500;font-size:.94rem}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:120px}
+.days div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;font-size:.76rem;font-weight:500;color:var(--muted)}
+.days i{width:100%;min-height:4px}
 .help{font-size:.78rem;color:var(--muted);margin-top:34px;line-height:1.6}
 
 /* breathe */
-.ov{position:fixed;inset:0;z-index:70;background:radial-gradient(120% 80% at 50% 20%, #1E2333 0%, #0D1019 100%);color:#ECE8E1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:24px;text-align:center}
+.ov{position:fixed;inset:0;z-index:70;background:#111111;color:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:24px;text-align:center}
 .ov[hidden]{display:none}
-.ov p{margin:0;font-family:"Gowun Batang",serif;font-size:1.1rem}
-.ring{width:190px;height:190px;border-radius:50%;border:1px solid rgba(232,198,120,.7);box-shadow:0 0 40px rgba(232,198,120,.2) inset,0 0 40px rgba(232,198,120,.15);transform:scale(.5)}
+.ov p{margin:0;font-weight:700;font-size:1.15rem}
+.ring{width:190px;height:190px;border-radius:50%;border:4px solid #FF5A1F;transform:scale(.5)}
 .ring.in{transition:transform 4s ease-in-out;transform:scale(1)}
 .ring.out{transition:transform 6s ease-in-out;transform:scale(.5)}
-.ov button{border:1px solid rgba(236,232,225,.3);background:transparent;color:#ECE8E1;border-radius:10px;padding:10px 18px;font-size:.9rem}
+.ov button{border:2px solid #FFFFFF;background:transparent;color:#FFFFFF;border-radius:0;padding:10px 18px;font-size:.9rem;font-weight:500}
 
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
-@media (prefers-reduced-motion:reduce){.rock.hit,.rock.wob,.drift{animation:none}.caption.go{animation-duration:.01s}}
+@media (prefers-reduced-motion:reduce){.rock.hit,.rock.wob{animation:none}.caption.go{animation-duration:.01s}}
+
+/* ===== simple ===== */
+.list{display:flex;flex-direction:column;margin-top:4px}
+.item{border-top:2px solid var(--ink);padding:14px 0 16px;display:flex;flex-direction:column;gap:10px}
+.item:last-child{border-bottom:2px solid var(--ink)}
+.ihead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ititle{font-size:1.1rem;font-weight:700;letter-spacing:-.02em;word-break:keep-all;overflow-wrap:anywhere}
+.ifoot{display:flex;gap:6px}
+.fbtn{flex:1;padding:11px 8px;border:2px solid var(--ink);border-radius:0;background:transparent;font-weight:700;font-size:.92rem}
+.fbtn.on{background:var(--ink);color:var(--bg)}
+.item.gone .ititle{text-decoration:line-through;text-decoration-thickness:2px;color:var(--muted)}
+.item.later .ititle{color:var(--muted)}
+.item.anim{animation:settle .3s ease}
+@keyframes settle{from{opacity:.35}to{opacity:1}}
+.donebox{padding:26px 0 20px;border-top:2px solid var(--ink);margin-bottom:6px}
+.donebox .big{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin:0 0 6px}
+@media (prefers-reduced-motion:reduce){.item.anim{animation:none}}
 </style>
 </head>
 <body>
@@ -290,34 +299,19 @@ function rng(seed){ let h=2166136261; for(const c of seed){ h^=c.charCodeAt(0); 
 function cracks(id){ const r=rng(id), out=[]; for(let i=0;i<9;i++){ let x=35+r()*30,y=35+r()*30,a=r()*Math.PI*2,d=`M${x.toFixed(1)} ${y.toFixed(1)}`; const n=3+Math.floor(r()*3); for(let k=0;k<n;k++){ a+=(r()-.5)*1.1; const L=8+r()*12; x+=Math.cos(a)*L; y+=Math.sin(a)*L; d+=` L${x.toFixed(1)} ${y.toFixed(1)}`; } out.push(d); } return out; }
 const lvOf = t => 1 + Math.floor(rng(t)()*3);
 const PAL = {facet:["#2B2F39","#7C8290"], glass:["#6F889E","#DCE8F0"]};
-const PARTC = {facet:["#6E7482","#454A57","#2E323C"], glass:["#C9DAE6","#9DB4C8","#7F98AE"], pebble:["#827B73","#6E6861","#4E4A45"]};
+const PARTC = {rock:["#6E717E","#4A4C57","#8C8F9B"], facet:["#222222","#555555","#FF5A1F"], glass:["#FFFFFF","#111111","#FF5A1F"]};
 function mix(a,b,t){ const p=s=>[1,3,5].map(i=>parseInt(s.slice(i,i+2),16)); const A=p(a),B=p(b); return "#"+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,"0")).join(""); }
-function styleOf(){ const m = draft && draft.mood; return m && m<=2 ? "glass" : "facet"; }
+function styleOf(){ return "rock"; }
 function rockShape(id, style){
-  const r = rng(id+style);
-  const open = `<svg class="shape" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">`;
-  if(style==="pebble"){
-    const cx = 50+(r()-.5)*4, rx = 47-r()*3, ry = 16+r()*2.5;
-    return open + `<ellipse cx="${cx}" cy="22" rx="${rx}" ry="${ry}" fill="#4B4742"/><ellipse cx="${cx-1}" cy="19.5" rx="${rx-4}" ry="${ry-3.5}" fill="#6A645D"/><ellipse cx="${cx-3}" cy="17" rx="${rx-14}" ry="${ry-8}" fill="#7F7870"/><ellipse cx="${cx-16+r()*4}" cy="10.5" rx="${9+r()*5}" ry="2.4" fill="#A49D93" opacity=".75"/></svg>`;
-  }
-  const glass = style==="glass", n = glass ? 7 : 9, pts = [];
-  for(let i=0;i<n;i++){
-    const a = i/n*Math.PI*2 + (r()-.5)*0.5;
-    const k = glass ? (i%2 ? 0.72+r()*0.12 : 0.95+r()*0.08) : 0.9+r()*0.12;
-    let x = 50 + Math.cos(a)*48*k, y = 21 + Math.sin(a)*(glass?21:18)*k;
-    y = Math.min(39.5, Math.max(glass?0.5:2, y)); x = Math.min(99.5, Math.max(0.5, x));
-    pts.push([x,y]);
-  }
-  const C = [44+r()*12, 14+r()*8], [lo,hi] = PAL[style];
-  let s = "", lines = "";
-  for(let i=0;i<n;i++){
-    const a = pts[i], b = pts[(i+1)%n], mx = (a[0]+b[0])/2-C[0], my = ((a[1]+b[1])/2-C[1])*2.4, L = Math.hypot(mx,my)||1;
-    let t = 0.5 + 0.5*((mx/L)*-0.6 + (my/L)*-0.8) + (r()-.5)*0.18; t = Math.min(1, Math.max(0, t));
-    s += `<polygon points="${C[0].toFixed(1)},${C[1].toFixed(1)} ${a[0].toFixed(1)},${a[1].toFixed(1)} ${b[0].toFixed(1)},${b[1].toFixed(1)}" fill="${mix(lo,hi,t)}"${glass?' opacity=".93"':""}/>`;
-    lines += `<line x1="${C[0].toFixed(1)}" y1="${C[1].toFixed(1)}" x2="${a[0].toFixed(1)}" y2="${a[1].toFixed(1)}"/>`;
-  }
-  const edge = glass ? `stroke="#EEF5FA" stroke-opacity=".75" stroke-width=".7"` : `stroke="#ffffff" stroke-opacity=".07" stroke-width=".6"`;
-  return open + s + `<g ${edge} vector-effect="non-scaling-stroke" style="vector-effect:non-scaling-stroke">${lines}</g>` + (glass ? `<polygon points="${pts.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#EEF5FA" stroke-opacity=".55" stroke-width=".7" style="vector-effect:non-scaling-stroke"/>` : "") + `</svg>`;
+  const r = rng(id+"ast"), n = 12, pts = [];
+  for(let i=0;i<n;i++){ const a=i/n*Math.PI*2+(r()-.5)*.35, k=.86+r()*.16; pts.push([50+Math.cos(a)*48*k, 20+Math.sin(a)*19*k]); }
+  const P = arr => arr.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");
+  const t = Math.floor(r()*3), base = ["#4A4C57","#55515A","#4E5560"][t], lite = ["#7A7D8A","#86808C","#7B8490"][t], dark = "#2E3037";
+  const lit = pts.map(([x,y]) => [50+(x-50)*.84-4, 20+(y-20)*.78-3]);
+  let craters = "";
+  for(let i=0;i<3;i++){ const cx=24+r()*52, cy=11+r()*18, rx=3+r()*6, ry=rx*.75;
+    craters += `<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="${dark}"/><path d="M${(cx-rx).toFixed(1)} ${cy.toFixed(1)} A${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 0 ${(cx+rx).toFixed(1)} ${cy.toFixed(1)}" fill="none" stroke="${lite}" stroke-width="1" style="vector-effect:non-scaling-stroke"/>`; }
+  return `<svg class="shape" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><polygon class="body" points="${P(pts)}" fill="${base}"/><polygon points="${P(lit)}" fill="${lite}" opacity=".5"/>${craters}</svg>`;
 }
 function smallRock(c, style){ return `<div class="rock small l${lvOf(c.text)}${style==="glass"?" glass":""}">${rockShape(c.text, style)}<span>${esc(c.text)}</span></div>`; }
 function moonStyle(load){ const dim = Math.min(load*0.16, 0.7); return `filter:brightness(${1-dim}) saturate(${1-dim*0.6});opacity:${1-dim*0.5}`; }
@@ -351,8 +345,7 @@ function renderToday(){
   if(step < 0){
     if(day){ el.innerHTML = summaryHTML(day, true); $("redo").onclick = () => { draft = newDraft(); step = 0; renderToday(); }; return; }
     const load = S.carry.length;
-    el.innerHTML = sceneHTML(load ? `어제 남겨둔 바위가 ${load}개 있어요` : "하루를 내려놓을 시간",
-        S.carry.map(c=>smallRock(c, "facet")).join(""), load)
+    el.innerHTML = `<h2>오늘 정리</h2><p class="lead">${load ? `어제 넘긴 것이 ${load}개 있어요` : "아직 정리 전이에요"}</p>${load ? `<div class="chips" style="margin-bottom:20px">${S.carry.map(c=>`<span class="chip sm static">${esc(c.text)}</span>`).join("")}</div>` : ""}`
       + (S.carry.some(c=>c.plan) ? `<div class="card"><h3 style="margin-top:0">오늘 해보기로 한 것</h3>${S.carry.filter(c=>c.plan).map(c=>`<p class="note" style="margin:4px 0"><span style="color:var(--ink)">${esc(c.text)}</span> — ${esc(c.plan)}</p>`).join("")}</div>` : "")
       + `<button class="primary" id="start" type="button">오늘 정리하기</button>
       <p class="muted" style="text-align:center;font-size:.84rem;margin-top:12px">고르기만 하면 돼요. 1분이면 충분해요.</p>`;
@@ -375,7 +368,7 @@ function renderToday(){
   else if(step === 3){
     el.innerHTML = progress() + `<h2>오늘 잘한 것</h2><p class="lead">작은 것이라도 괜찮아요</p>
       <div class="chips">${GOOD.map(d=>`<button class="chip${draft.good.includes(d)?" on":""}" data-g="${esc(d)}" type="button" aria-pressed="${draft.good.includes(d)}">${esc(d)}</button>`).join("")}</div>
-      <div class="row"><button class="back" id="prev" type="button">이전</button><button class="primary" id="next" type="button">${draft.stress.length ? "바위 내려놓으러 가기" : "다음"}</button></div>`;
+      <div class="row"><button class="back" id="prev" type="button">이전</button><button class="primary" id="next" type="button">다음</button></div>`;
     el.querySelectorAll("[data-g]").forEach(b => b.onclick = () => { toggle(draft.good, b.dataset.g); b.classList.toggle("on"); b.setAttribute("aria-pressed", b.classList.contains("on")); });
     $("prev").onclick = () => { step = 2; renderToday(); };
     $("next").onclick = () => {
@@ -387,9 +380,10 @@ function renderToday(){
   }
   else if(step === 4){ renderRitual(el); }
   else if(step === 5){
-    el.innerHTML = sceneHTML("오늘도 수고했어요", S.carry.map(c=>smallRock(c, styleOf())).join(""), 0)
-      + `<div class="card"><h3 style="margin-top:0">한 줄 남기기 · 선택</h3><input class="memo" id="memo" maxlength="60" placeholder="오늘을 한 줄로" value="${esc(draft.memo)}"></div>
-      <button class="primary" id="fin" type="button">잘 자요</button>`;
+    const dd = S.days[todayKey()], sm = dd ? dd.stress.filter(x=>x.fate!=="carry").length : 0, ca = dd ? dd.stress.filter(x=>x.fate==="carry").length : 0;
+    el.innerHTML = `<div class="donebox"><p class="big">오늘 정리 완료</p><p class="note">${dd && dd.stress.length ? `내려놓은 것 ${sm}개 · 내일로 ${ca}개` : "오늘은 누른 게 없었어요"}</p></div>
+      <div class="card"><h3 style="margin-top:0">한 줄 남기기 · 선택</h3><input class="memo" id="memo" maxlength="60" placeholder="오늘을 한 줄로" value="${esc(draft.memo)}"></div>
+      <button class="primary" id="fin" type="button">닫기</button>`;
     $("fin").onclick = () => { const d = S.days[todayKey()]; if(d){ d.memo = $("memo").value.trim(); save(); } step = -1; renderToday(); };
   }
 }
@@ -419,78 +413,82 @@ function renderStressStep(el){
   $("prev").onclick = () => { step = 1; renderToday(); }; $("next").onclick = () => { step = 3; renderToday(); };
 }
 
-// ---------- ritual ----------
-const isReady = r => r.acts.length >= NEED;
-const crackN = r => Math.min(9, Math.round(Math.min(r.acts.length,NEED)/NEED*6) + r.hits);
+// ---------- ritual (simple list) ----------
+let justIdx = -1;
 function renderRitual(el){
-  const left = rocks.filter(r=>!r.fate);
-  if(!left.length){ finishDay(); return; }
-  if(!left.some(r=>r.id===sel)){ sel = left[0].id; carryOpen = false; }
-  const r = rocks.find(x=>x.id===sel);
-  const load = left.reduce((a,x)=>a + (isReady(x)?0.4:1), 0);
-  el.innerHTML = progress() + sceneHTML("오늘 해본 것만큼 금이 가요", "", load) + `<div class="card panel" id="panel"></div><button class="primary" id="smashAll" type="button">남은 바위 한 번에 깨기 · ${left.length}개</button><button class="back" id="prev" type="button">이전</button>`;
-  const stack = $("stack"), style = styleOf();
-  left.forEach(x => {
-    const lv = lvOf(x.text), b = document.createElement("div");
-    b.className = `rock l${lv}${style==="glass"?" glass":""}${x.id===sel?" sel":""}${isReady(x)?" ready":""}`;
-    b.tabIndex = 0; b.setAttribute("role","button"); b.setAttribute("aria-label", `${x.text}${isReady(x)?", 깰 준비가 됐어요":""}`);
-    b.innerHTML = rockShape(x.id, style) + `<svg class="ck" viewBox="0 0 100 100" preserveAspectRatio="none">${cracks(x.id).slice(0,crackN(x)).map(d=>`<path d="${d}"/>`).join("")}</svg><span>${esc(x.text)}</span>`;
-    b.addEventListener("pointerdown", e => { e.preventDefault(); tapRock(x, b, e.clientX, e.clientY, lv); });
-    b.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); const q=b.getBoundingClientRect(); tapRock(x,b,q.left+q.width/2,q.top+q.height/2,lv); } });
-    stack.appendChild(b);
+  const total = rocks.length, decided = rocks.filter(r=>r.fate).length;
+  if(!total){ finishDay(); return; }
+  el.innerHTML = progress() + `<h2>오늘 것 정리하기</h2><p class="lead">해본 걸 체크하고, 내려놓을지 내일로 넘길지 골라요</p>
+    <div class="list">${rocks.map((r,i)=>rowHTML(r,i)).join("")}</div>
+    <div class="row"><button class="back" id="prev" type="button">이전</button><button class="primary" id="done" type="button">${decided<total ? "나머지 내려놓고 완료" : "정리 완료"}</button></div>`;
+  justIdx = -1;
+  el.querySelectorAll("[data-a]").forEach(b => b.onclick = () => {
+    const r = rocks[+b.dataset.i], a = b.dataset.a, j = r.acts.indexOf(a);
+    if(j >= 0){ r.acts.splice(j,1); renderToday(); return; }
+    if(a === "1분 숨 고르기"){ breathe(() => { r.acts.push(a); renderToday(); }); return; }
+    r.acts.push(a); renderToday();
   });
-  renderPanel(r);
+  el.querySelectorAll("[data-f]").forEach(b => b.onclick = () => {
+    const i = +b.dataset.i, r = rocks[i], f = b.dataset.f;
+    r.fate = r.fate === f ? null : f; justIdx = i; renderToday();
+  });
   $("prev").onclick = () => { step = 3; renderToday(); };
-  $("smashAll").onclick = () => {
-    const els = [...stack.children];
-    $("smashAll").disabled = true; $("prev").disabled = true;
-    $("scene").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-    const gap = reduce ? 0 : 160, lead = reduce ? 0 : 350;
-    left.forEach((x,i) => { x.fate = "smashed"; setTimeout(() => shatter(els[i], lvOf(x.text)), lead + i*gap); });
-    setTimeout(() => caption(left.length > 1 ? "전부 내려놓았어요" : "내려놓았어요"), lead);
-    setTimeout(() => renderToday(), reduce ? 200 : lead + left.length*gap + 1100);
-  };
+  $("done").onclick = () => { rocks.forEach(r => { if(!r.fate) r.fate = "smashed"; }); finishDay(); };
 }
-function renderPanel(r){
-  const p = $("panel"), acts = actsFor(r), plan = r.plan;
-  const ch = a => `<button class="chip${r.acts.includes(a)?" done":""}${a===plan?" plan":""}" data-a="${esc(a)}" type="button" aria-pressed="${r.acts.includes(a)}">${esc(a)}</button>`;
-  const n = Math.min(r.acts.length, NEED);
-  p.innerHTML = `<h4>${esc(r.text)}</h4>
-    <div class="bar"><i style="width:${n/NEED*100}%"></i></div>
-    <p class="note">오늘 해본 걸 고르면 금이 가요 · ${NEED}개 중 ${n}개</p>
-    ${plan ? `<p class="plan">어제 정한 것 — ${esc(plan)}</p>` : ""}
-    <h3>해본 것</h3><div class="chips">${acts.map(ch).join("")}</div>
-    <h3>바꿀 수 없는 거라면</h3><div class="chips">${LETGO.map(ch).join("")}</div>
-    ${isReady(r) ? `<p class="callout">금이 다 갔어요. 위의 바위를 세 번 눌러 깨뜨리세요.</p>` : ""}
-    <div class="foot"><span class="note">${rocks.filter(x=>!x.fate).length}개 남음</span><button class="linkbtn" id="carryBtn" type="button">${carryOpen?"닫기":"내일로 넘기기"}</button></div>
-    ${carryOpen ? `<div class="carrybox"><p class="note" style="margin-bottom:8px">내일 해볼 것을 하나 고르면 아침에 알려드려요</p>
-      <div class="chips">${PLANS.map(x=>`<button class="chip" data-plan="${esc(x)}" type="button">${esc(x)}</button>`).join("")}<button class="chip ghost" data-plan="" type="button">그냥 넘기기</button></div></div>` : ""}`;
-  p.querySelectorAll("[data-a]").forEach(b => b.onclick = () => {
-    const a = b.dataset.a;
-    if(r.acts.includes(a)){ r.acts.splice(r.acts.indexOf(a),1); renderToday(); return; }
-    if(a === "1분 숨 고르기"){ breathe(() => addAct(r, a)); return; }
-    addAct(r, a);
-  });
-  $("carryBtn").onclick = () => { carryOpen = !carryOpen; renderPanel(r); };
-  p.querySelectorAll("[data-plan]").forEach(b => b.onclick = () => { r.fate = "carry"; r.plan = b.dataset.plan || null; carryOpen = false; caption("내일로 보냈어요"); setTimeout(()=>renderToday(), reduce?0:300); });
+function rowHTML(r, i){
+  const ch = a => `<button class="chip sm${r.acts.includes(a)?" done":""}" data-i="${i}" data-a="${esc(a)}" type="button" aria-pressed="${r.acts.includes(a)}">${esc(a)}</button>`;
+  const cls = (r.fate==="smashed" ? " gone" : r.fate==="carry" ? " later" : "") + (i===justIdx ? " anim" : "");
+  return `<div class="item${cls}">
+    <div class="ihead"><span class="ititle">${esc(r.text)}</span><span class="note">${esc(CAT[r.cat]?.name||"기타")}${r.carried?" · 어제에서":""}</span></div>
+    ${r.fate ? "" : `<div class="chips">${actsFor(r).concat(LETGO).map(ch).join("")}</div>`}
+    <div class="ifoot">
+      <button type="button" class="fbtn${r.fate==="smashed"?" on":""}" data-i="${i}" data-f="smashed" aria-pressed="${r.fate==="smashed"}">${r.fate==="smashed"?"내려놓음":"내려놓기"}</button>
+      <button type="button" class="fbtn${r.fate==="carry"?" on":""}" data-i="${i}" data-f="carry" aria-pressed="${r.fate==="carry"}">${r.fate==="carry"?"내일로 넘김":"내일로"}</button>
+    </div></div>`;
 }
-function addAct(r, a){
-  const was = isReady(r);
-  r.acts.push(a); renderToday();
-  const el = document.querySelector(".rock.sel");
-  if(el){ const q = el.getBoundingClientRect(); dust(q.left+q.width/2, q.top+q.height/2, 10); el.classList.add("hit"); }
-  if(!was && isReady(r)){ caption("금이 다 갔어요"); if(navigator.vibrate) try{ navigator.vibrate([15,40,15]); }catch(e){} }
+const FXN = {zoom:"줌아웃", hole:"블랙홀", dust:"별가루"};
+function fxMode(){ return S.fx || "zoom"; }
+function release(el, lv, done){
+  const m = fxMode();
+  if(m === "hole"){ suck(el, 0); setTimeout(done, reduce?200:1600); return; }
+  if(m === "zoom"){ shrink(el); setTimeout(done, reduce?250:1800); return; }
+  shatter(el, lv); setTimeout(done, reduce?150:1000);
 }
-function tapRock(r, el, x, y, lv){
-  if(r.fate) return;
-  if(sel !== r.id){ sel = r.id; carryOpen = false; renderToday(); return; }
-  if(!isReady(r)){ el.classList.remove("wob"); void el.offsetWidth; el.classList.add("wob"); return; }
-  r.hits++;
-  if(r.hits >= HITS){ r.fate = "smashed"; shatter(el, lv); caption(["내려놓았어요","잘 가","오늘은 여기까지"][Math.floor(Math.random()*3)]); setTimeout(()=>renderToday(), reduce?150:900); return; }
-  el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit");
-  el.querySelector("svg.ck").innerHTML = cracks(r.id).slice(0,crackN(r)).map(d=>`<path d="${d}"/>`).join("");
-  chipsFX(x, y, lv, 6);
-  if(navigator.vibrate) try{ navigator.vibrate(12); }catch(e){}
+function holeEl(){ let h = document.querySelector("#scene .bh"); if(!h){ h = document.createElement("div"); h.className = "bh"; $("scene").appendChild(h); } return h; }
+function suck(el, delay){
+  const h = holeEl(), hr = h.getBoundingClientRect(), r = el.getBoundingClientRect();
+  if(reduce){ el.style.opacity = "0"; return; }
+  const dx = hr.left+hr.width/2-(r.left+r.width/2), dy = hr.top+hr.height/2-(r.top+r.height/2);
+  el.style.animation = "none";
+  const a = el.animate([{transform:"translate(0,0) scale(1) rotate(0deg)",opacity:1},{transform:`translate(${dx*.55}px,${dy*.55}px) scale(.7,.4) rotate(90deg)`,opacity:1,offset:.55},{transform:`translate(${dx}px,${dy}px) scale(0) rotate(270deg)`,opacity:0}],{duration:1200,delay,easing:"cubic-bezier(.55,0,.85,.4)",fill:"forwards"});
+  a.onfinish = () => { h.animate([{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) scale(1.25)"},{transform:"translate(-50%,-50%) scale(1)"}],{duration:320}); if(navigator.vibrate) try{ navigator.vibrate(25); }catch(e){} };
+}
+function shrink(el){
+  if(reduce){ el.style.opacity = "0"; return; }
+  el.style.animation = "none";
+  el.animate([{transform:"scale(1)",opacity:1},{transform:"scale(.035)",opacity:1,offset:.8},{transform:"scale(.02)",opacity:0}],{duration:1500,easing:"cubic-bezier(.6,0,.2,1)",fill:"forwards"});
+  const e = document.querySelector("#scene .horizon"); if(e) e.animate([{transform:"scale(1)"},{transform:"scale(.82)"},{transform:"scale(1)"}],{duration:1600,easing:"ease-in-out"});
+  const st = document.querySelector("#scene .stars"); if(st) st.animate([{transform:"scale(1)"},{transform:"scale(.75)"},{transform:"scale(1)"}],{duration:1600,easing:"ease-in-out"});
+}
+function zoomAll(els, done){
+  const scene = $("scene"), stack = $("stack"), earth = scene.querySelector(".horizon"), stars = scene.querySelector(".stars");
+  if(reduce){ els.forEach(e => e.style.opacity = "0"); setTimeout(done, 400); return; }
+  const dur = 3400;
+  els.forEach(e => e.style.animation = "none");
+  stack.style.transformOrigin = "50% 100%";
+  stack.animate([{transform:"scale(1)",opacity:1},{transform:"scale(.02)",opacity:1,offset:.5},{transform:"scale(.01)",opacity:0}],{duration:dur*.7,easing:"cubic-bezier(.6,0,.3,1)",fill:"forwards"});
+  earth.animate([{transform:"translateY(0) scale(1)",opacity:1},{transform:"translateY(-90px) scale(.03)",opacity:1,offset:.75},{transform:"translateY(-90px) scale(.01)",opacity:0}],{duration:dur,easing:"cubic-bezier(.5,0,.3,1)",fill:"forwards"});
+  stars.animate([{transform:"scale(1)"},{transform:"scale(.45)"}],{duration:dur,easing:"cubic-bezier(.5,0,.3,1)",fill:"forwards"});
+  ["지구","태양계","우리 은하"].forEach((c,i) => setTimeout(() => caption(c), 250 + i*850));
+  setTimeout(done, dur + 900);
+}
+function releaseAll(left, els, done){
+  const m = fxMode();
+  if(m === "zoom") return zoomAll(els, done);
+  if(m === "hole"){ els.forEach((e,i) => suck(e, i*260)); setTimeout(done, reduce?250:els.length*260+1700); return; }
+  const gap = reduce?0:160, lead = reduce?0:350;
+  els.forEach((e,i) => setTimeout(() => shatter(e, lvOf(left[i].text)), lead+i*gap));
+  setTimeout(done, reduce?200:lead+els.length*gap+1300);
 }
 function caption(t){ const c = $("caption"); if(!c) return; c.textContent = t; c.classList.remove("go"); void c.offsetWidth; c.classList.add("go"); }
 function finishDay(){
@@ -511,11 +509,11 @@ function summaryHTML(day, isToday){
     ${day.memo?`<p class="memoq">“${esc(day.memo)}”</p>`:""}
     ${day.did.length?`<h3>한 것</h3><div class="chips">${day.did.map(d=>`<span class="chip sm static">${esc(d)}</span>`).join("")}</div>`:""}
     ${sm.length?`<h3>내려놓은 것</h3><div class="chips">${sm.map(s=>`<span class="chip sm static" style="text-decoration:line-through;color:var(--muted)">${esc(s.text)}</span>`).join("")}</div>`:""}
-    ${acts.length?`<h3>금을 낸 행동</h3><div class="chips">${acts.map(a=>`<span class="chip sm static done">${esc(a)}</span>`).join("")}</div>`:""}
+    ${acts.length?`<h3>해본 것</h3><div class="chips">${acts.map(a=>`<span class="chip sm static done">${esc(a)}</span>`).join("")}</div>`:""}
     ${ca.length?`<h3>내일로 넘긴 것</h3><div class="chips">${ca.map(s=>`<span class="chip sm static">${esc(s.text)}${s.plan?` · ${esc(s.plan)}`:""}</span>`).join("")}</div>`:""}
     ${!day.stress.length?`<h3>나를 누른 것</h3><p class="empty">가벼운 하루였어요</p>`:""}
     ${day.good.length?`<h3>잘한 것</h3><div class="chips">${day.good.map(d=>`<span class="chip sm static">${esc(d)}</span>`).join("")}</div>`:""}
-  </div>${isToday?`<p class="muted serif" style="text-align:center;margin:22px 0 6px">오늘 정리를 마쳤어요. 편히 쉬어요.</p><div style="text-align:center"><button class="linkbtn" id="redo" type="button">다시 정리하기</button></div>`:""}`;
+  </div>${isToday?`<p class="muted serif" style="text-align:center;margin:22px 0 6px">오늘 정리 완료</p><div style="text-align:center"><button class="linkbtn" id="redo" type="button">다시 정리하기</button></div>`:""}`;
 }
 
 // ---------- breathing ----------
@@ -537,6 +535,16 @@ $("bSkip").onclick = () => { bT.forEach(clearTimeout); bT=[]; $("breathe").hidde
 // ================= calendar =================
 let calY, calM, calSel = null;
 { const d = parseKey(todayKey()); calY = d.getFullYear(); calM = d.getMonth(); }
+function skyHTML(){
+  const tk = todayKey(), stars = []; let lines = "";
+  Object.keys(S.days).sort().forEach(k => {
+    const pts = [];
+    (S.days[k].stress||[]).filter(s => s.fate !== "carry").forEach(s => { const r = rng(k+s.text); const p = {x:10+r()*300, y:12+r()*150, r:.8+r()*1.3, today:k===tk}; pts.push(p); stars.push(p); });
+    for(let i=1;i<pts.length;i++) lines += `<line x1="${pts[i-1].x.toFixed(1)}" y1="${pts[i-1].y.toFixed(1)}" x2="${pts[i].x.toFixed(1)}" y2="${pts[i].y.toFixed(1)}"/>`;
+  });
+  const n = stars.length;
+  return `<div class="sky"><svg viewBox="0 0 320 180" role="img" aria-label="내려놓은 고민 ${n}개가 별이 된 밤하늘"><g stroke="#8C90A3" stroke-opacity=".4" stroke-width=".6">${lines}</g>${stars.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${(p.today?p.r+1:p.r).toFixed(1)}" fill="${p.today?"#FF8A4C":"#ECEAF2"}"/>`).join("")}</svg><div class="skyt"><b>내 밤하늘</b><span>${n ? `별 ${n}개` : "아직 별이 없어요"}</span></div></div>`;
+}
 function renderCal(){
   const el = $("vCal"), first = new Date(calY, calM, 1), n = new Date(calY, calM+1, 0).getDate(), tk = todayKey();
   let cells = WD.map(w=>`<span class="wd">${w}</span>`).join("");
@@ -638,7 +646,7 @@ function chipsFX(x,y,lv,n){
 }
 function dust(x,y,n){
   if(reduce) return;
-  for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, sp=.6+Math.random()*3.2; parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-.8,r:.8+Math.random()*1.8,life:1,decay:.006+Math.random()*.01,gold:true}); }
+  const slow = fxMode()==="dust"; for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, sp=.5+Math.random()*(slow?2.4:3.2); parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-.6,r:.6+Math.random()*1.6,life:1,decay:slow?.0025+Math.random()*.004:.006+Math.random()*.01,gold:true}); }
   run();
 }
 function run(){ if(!raf) raf=requestAnimationFrame(tick); }
@@ -647,10 +655,10 @@ function tick(){
   parts = parts.filter(p=>p.life>0 && p.y<innerHeight+60);
   for(const p of parts){
     if(p.gold){ p.x+=p.vx; p.y+=p.vy; p.vx*=.97; p.vy=p.vy*.97-.02; p.life-=p.decay;
-      ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle="#EED49A"; ctx.shadowColor="rgba(238,212,154,.9)"; ctx.shadowBlur=6;
+      ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle="#FFE3D1"; ctx.shadowColor="rgba(255,170,120,.9)"; ctx.shadowBlur=5;
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; }
     else { p.vy+=.42; p.x+=p.vx; p.y+=p.vy; p.vx*=.99; p.rot+=p.vr; p.life-=.011;
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.color; ctx.strokeStyle="rgba(255,255,255,.12)"; ctx.lineWidth=1;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.color; ctx.strokeStyle="rgba(0,0,0,0)"; ctx.lineWidth=0;
       ctx.beginPath(); ctx.moveTo(...p.pts[0]); ctx.lineTo(...p.pts[1]); ctx.lineTo(...p.pts[2]); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore(); }
   }
   ctx.globalAlpha = 1;
@@ -661,7 +669,7 @@ function tick(){
 renderToday();
 
 // ================= auto update (GitHub Pages) =================
-const APP_VERSION = "2026-10-28-1";
+const APP_VERSION = "2026-11-02-4";
 if(/github\.io$/.test(location.hostname)){
   const check = async () => {
     try{
